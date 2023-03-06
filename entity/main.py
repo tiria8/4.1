@@ -4,21 +4,28 @@ from request import Request
 from shop import Shop
 from store import Store
 
-store = Store(items={
-    "печенька": 20,
-    "пончик": 25,
-    "коробки": 3,
-    "собачки": 10
-})
-shop = Shop(items={
-    "печенька": 3,
-    "пончик": 5,
-    "коробки": 1,
-    "собачки": 2
-})
+store = Store(items={})
+shop = Shop(items={})
+
 storages = {
     "магазин": shop,
     "склад": store
+}
+
+store.items = {
+    "печенька": 20,
+    "пончик": 25,
+    "коробки": 3,
+    "собачки": 10,
+    "цветы": 15
+}
+
+shop.items = {
+    "печенька": 1,
+    "пончик": 2,
+    "коробки": 1,
+    "собачки": 2,
+    "цветы": 3
 }
 
 def main():
@@ -26,7 +33,7 @@ def main():
 
     while True:
         for i in storages:
-            print(f'В {i} хранится:\n {storages[i].get_items()}')
+            print(f'В {i} хранится:\n {storages[i].items}')
 
         user_input = input(
             'Введите запрос по типу "Доставить 3 печенька из склад в магазин"\n'
@@ -42,7 +49,7 @@ def main():
             print(e.message)
             continue
 
-        courier = Courier(request=Request, storages=storages)
+        courier = Courier(request=request, storages=storages)
 
         try:
             courier.move()

@@ -13,9 +13,6 @@ class AbstractStorage(ABC):
     def get_free_space(self):
         pass
 
-    @abstractmethod
-    def get_items(self):
-        pass
 
     @abstractmethod
     def get_unique_item_count(self):
